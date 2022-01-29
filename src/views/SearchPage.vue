@@ -22,7 +22,7 @@
   <!-- filtros -->
   <div class="flex justify-center pl-2 pr-2 md:pl-0 md:pr-0 pb-3 ">
     <div class="w-full md:w-1/2">
-      <div :class="{hidden:showed}" >
+      <div :hidden="showed" >
         <filters @update:query="updateFilter" />
         <button class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white text-sm py-1 px-2 border border-green-500 hover:border-transparent rounded" @click="searchFilter">Buscar</button>
       </div>
