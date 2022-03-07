@@ -84,7 +84,7 @@ export default {
         this.page = parseInt(query.page)
       }
     }
-    this.searchEstablecimientos()
+    this.searchEstablecimientos(query.page)
   },
   watch: {
     page () {
