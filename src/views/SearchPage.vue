@@ -1,9 +1,10 @@
 <template lang="">
   <!-- buscador -->
-  <div class="pb-4">
-    <div class="flex flex-row justify-center">
-    <img src="https://zenprospect-production.s3.amazonaws.com/uploads/pictures/605ae09611857400012a342e/picture" class="w-10">
-    <h1 class="text-2xl font-bold place-self-center">EduMap</h1>
+  <div class="pb-4 mt-4">
+    <div class="flex flex-row justify-center pb-3">
+      <img src="../assets/logo.png" class="w-10 mr-2">
+      <h1 class="text-2xl font-bold place-self-center">EduMap - Argentina</h1>
+      <img src="../assets/logo.png" class="w-10 ml-2">
     </div>
     <h4 class="text-xl">Buscador de instituciones educativas</h4>
   </div>
@@ -14,7 +15,7 @@
         v-on:input="searchTimer"
       />
       <div class="w-auto flex p-2 justify-center">
-        <button v-on:click="changeFilterVisibility" class="flex items-center text-sm w-auto hover:text-green-500"><i class=" gg-list"></i></button>
+        <button v-on:click="changeFilterVisibility" class="flex items-center text-sm w-auto hover:text-blue-500"><i class=" gg-list"></i></button>
       </div>
     </div>
   </div>
@@ -24,14 +25,14 @@
     <div class="w-full md:w-1/2">
       <div :hidden="showed" >
         <filters @update:query="updateFilter" />
-        <button class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white text-sm py-1 px-2 border border-green-500 hover:border-transparent rounded" @click="searchFilter">Buscar</button>
+        <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white text-sm py-1 px-2 border border-blue-500 hover:border-transparent rounded" @click="searchFilter">Buscar</button>
       </div>
     </div>
   </div>
 
   <!-- loader -->
-  <div class="flex items-center justify-center space-x-2 animate-pulse" v-if="loader" >
-    <div class="w-8 h-8 bg-green-600 rounded-full"></div>
+  <div class="flex items-center justify-center space-x-2 animate-pulse pb-5" v-if="loader" >
+    <div class="w-8 h-8 bg-blue-600 rounded-full"></div>
   </div>
 
   <!-- mensaje de error y listado -->
@@ -42,6 +43,10 @@
     <list-establecimientos class="pb-3" v-else v-bind:list="list" />
     <pagination class="pb-5" :page="page" :previous="handlePreviousPage" :next="handleNextPage" :set="handleSetPage" />
   </div>
+
+  <footer class="mb-3">
+    <b>Hecho con ❤ por <a href="https://github.com/Hectorv72" class="text-blue-700">Hector Valdez</a></b>
+  </footer>
 
 </template>
 <script>
@@ -137,7 +142,7 @@ export default {
         data = { ...data, nombre: this.search }
       }
       if (this.page > 1) {
-        data = { ...data, offset: (this.page - 1) * this.records }
+        data = { ...data, offset: (parseInt(this.page) - 1) * this.records }
       }
       this.updateEstablecimientos(data)
     },
@@ -159,10 +164,10 @@ export default {
       // this.searchEstablecimiento()
     },
     handleNextPage () {
-      this.searchEstablecimientos(this.page + 1)
+      this.searchEstablecimientos(parseInt(this.page) + 1)
     },
     handlePreviousPage () {
-      if (this.page > 0) {
+      if (this.page > 1) {
         this.searchEstablecimientos(this.page - 1)
       }
     },
